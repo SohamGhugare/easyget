@@ -13,9 +13,11 @@ import (
 )
 
 var getCmd = &cobra.Command{
-	Use:   "get",
+	Use:   "get [alias]",
 	Short: "Install a dependency",
-	Long: ``,
+	Long: `This command goes through the list of all the registered aliases and gets the associated dependency. Equivalent to 'go get [url]' where url is the actual url to the alias dependency`,
+	Example: "  easyget get cobra\n  easyget get 1",
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1{
 			log.Fatal("Provide the dependency name to add to your project.\nUse the --help flag for comprehensive help on how to use this tool")
