@@ -14,7 +14,9 @@ func ExecShell(dep string, updateFlag bool){
 	} else {
 		args = []string{"get", dep}
 	}
+	
 	cmd := exec.Command("go", args...)
+	// cmd := exec.Command("go", "get", dep)
 	out, err := cmd.Output()
 	if err != nil {
 		log.Fatalf("Failed to exec command: %v", err)
@@ -22,5 +24,5 @@ func ExecShell(dep string, updateFlag bool){
 	if string(out) != ""{
 		fmt.Println("Command Output:", string(out))
 	}
-	log.Printf("Successfully added %v", args)
+	log.Printf("Successfully added %v", dep)
 }
