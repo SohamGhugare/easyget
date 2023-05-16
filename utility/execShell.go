@@ -16,7 +16,10 @@ func ExecShell(dep string, updateFlag bool){
 	}
 	
 	cmd := exec.Command("go", args...)
+
+	// Debugging the actual command
 	// cmd := exec.Command("go", "get", dep)
+	
 	out, err := cmd.Output()
 	if err != nil {
 		log.Fatalf("Failed to exec command: %v", err)
