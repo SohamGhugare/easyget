@@ -1,0 +1,13 @@
+{
+    "aliases": [
+        {
+            "name": "gin",
+            "url": "github.com/gin-gonic/gin"
+        },
+        {
+            "name": "cobra",
+            "url": "github.com/spf13/cobra"
+        }
+    ]
+    
+}
