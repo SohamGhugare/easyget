@@ -6,9 +6,15 @@ import (
 	"os/exec"
 )
 
-func ExecShell(args string){
-	log.Printf("Attempted to get %v", args)
-	cmd := exec.Command("go", "get", args)
+func ExecShell(dep string, updateFlag bool){
+	log.Printf("Attempted to get %v", dep)
+	var args []string
+	if updateFlag {
+		args = []string{"get", "-u", dep}
+	} else {
+		args = []string{"get", dep}
+	}
+	cmd := exec.Command("go", args...)
 	out, err := cmd.Output()
 	if err != nil {
 		log.Fatalf("Failed to exec command: %v", err)

@@ -3,7 +3,7 @@ package utility
 import (
 	"easyget/models"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 )
@@ -17,7 +17,7 @@ func ParseJson(dest *models.Aliases) {
 
 	defer jsonFile.Close()
 
-	byteValue, _ := ioutil.ReadAll(jsonFile)
+	byteValue, _ := io.ReadAll(jsonFile)
 	json.Unmarshal(byteValue, &dest)
 
 	
