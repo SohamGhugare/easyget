@@ -7,6 +7,7 @@ import (
 )
 
 func ExecShell(args string){
+	log.Printf("Attempted to get %v", args)
 	cmd := exec.Command("go", "get", args)
 	out, err := cmd.Output()
 	if err != nil {
@@ -15,5 +16,5 @@ func ExecShell(args string){
 	if string(out) != ""{
 		fmt.Println("Command Output:", string(out))
 	}
-	
+	log.Printf("Successfully added %v", args)
 }

@@ -7,6 +7,7 @@ import (
 	"easyget/models"
 	"easyget/utility"
 	"log"
+	"strconv"
 
 	"github.com/spf13/cobra"
 )
@@ -20,19 +21,26 @@ var getCmd = &cobra.Command{
 			log.Fatal("Provide the dependency name to add to your project.\nUse the --help flag for comprehensive help on how to use this tool")
 		}
 		dependency := args[0]
-		log.Println("Attempting to get", dependency)
 
 		var aliases models.Aliases
 		utility.ParseJson(&aliases)
 
-		for _, alias := range aliases.Aliases {
-			if alias.Name == dependency{
-				utility.ExecShell(alias.Url)
-				log.Printf("Successfully added dependency %v", dependency)
+		if dep, err:=strconv.Atoi(dependency); err == nil {
+			if dep > len(aliases.Aliases){
+				log.Fatal("Invalid index. Use `easyget list` to check the registered aliases.")
 				return
 			}
-		} 
-		log.Fatalf("Dependency %v not found.", dependency)
+			utility.ExecShell(aliases.Aliases[dep-1].Url)
+			
+		} else {
+			for _, alias := range aliases.Aliases {
+				if alias.Name == dependency{
+					utility.ExecShell(alias.Url)
+					return
+				}
+			} 
+			log.Fatalf("Dependency %v not found.", dependency)
+		}
 	},
 }
 
