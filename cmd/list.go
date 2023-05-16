@@ -15,7 +15,7 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List all the registered aliases",
-	Long: ``,
+	Long: `This command lists all the registered aliases and their corresponding original urls. This also contains the alias index which can be used for easy installation through 'easyget get' command`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Unmarshalling registered aliases json
